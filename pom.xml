@@ -58,6 +58,14 @@
         <version>4.13.1</version>
         <scope>test</scope>
     </dependency>
+    
+    <!-- Les tag dans les jsp -->
+    <dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
+
 
 </dependencies>
 

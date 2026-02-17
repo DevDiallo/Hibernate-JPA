@@ -14,8 +14,8 @@ public class Poulet {
 	
 	public Poulet() {}
 	
-	public Poulet(int id , Double poids , Double prix) {
-		this.id_poulet = id ; 
+	public Poulet(Double poids , Double prix) {
+		 
 		this.poids = poids ; 
 		this.prix = prix ; 
 	}
@@ -33,6 +33,6 @@ public class Poulet {
 	
 	// affichage en toString()
 	public String toString() {
-		return "Id_poulet : " + getId() + "Poids : " + getPoids() + "Prix : " + getPrix() ; 
+		return "Id_poulet : " + getId()+ " , " + "Poids : " + getPoids() + " , " + "Prix : " + getPrix() ; 
 	}
 }
