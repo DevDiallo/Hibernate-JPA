@@ -8,19 +8,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>Bienvenue dans votre panier </h3>
+<form action="controller" method="POST">
+
+<h3>Bienvenue dans votre panier</h3>
+
 <table border="1">
-	<tr>
-		<th>Poids</th>
-		<th>Prix</th>
-	</tr>
-	<c:forEach var="p" items="${PouletsList}">
-            <tr>
-                <td>${p.poids}</td>
-                <td>${p.prix}</td>
-                
-            </tr>
-     </c:forEach>
+    <tr>
+        <th>Choix</th>
+        <th>Poids</th>
+        <th>Prix</th>
+    </tr>
+
+    <c:forEach var="p" items="${PouletsList}" varStatus="status">
+        <tr>
+            <td>
+                <!-- On envoie l'index -->
+                <input type="radio" name="selectedIndex" 
+                       value="${status.index}" required>
+            </td>
+            <td>${p.poids}</td>
+            <td>${p.prix}</td>
+        </tr>
+    </c:forEach>
 </table>
+
+<br>
+<input name="btn-supprimer" type="submit" value="Supprimer">
+
+</form>
+
 </body>
 </html>
