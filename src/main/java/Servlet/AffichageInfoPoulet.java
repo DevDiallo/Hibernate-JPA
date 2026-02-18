@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ConnectorDB;
+import DAO.PanierCRUD;
 import Modele.Poulet;
 
 /**
@@ -62,7 +63,7 @@ public class AffichageInfoPoulet extends HttpServlet {
 		}
 		if(poulets == null) { poulets = new ArrayList<>() ; }
 		String btn_ajoutPanier = request.getParameter("Ajout-Panier");
-		if ("btn-ajoutPanier".equals(btn_ajoutPanier)) {
+		if (btn_ajoutPanier != null) {
 			poulets.add(poulet) ; 
 		    NombreElements += 1;
 		    request.getSession().setAttribute("PouletsList",poulets) ;
@@ -89,7 +90,23 @@ public class AffichageInfoPoulet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String index = request.getParameter("selectedIndex") ; 
+		String btn_supprimer = request.getParameter("btn-supprimer") ; 
+		 
+		if(index != null) {
+			int ind = Integer.parseInt(index) ; 
+			List<Poulet> poulets = (List<Poulet>) request.getSession().getAttribute("PouletsList") ; 
+			Integer NombreElements = (Integer) request.getSession().getAttribute("NbrElement");
+			if(poulets!=null && ind>=0 && ind<poulets.size() && btn_supprimer != null) {
+				PanierCRUD paniercrud = new PanierCRUD(poulets) ; 
+				paniercrud.removePoulet(ind) ; 
+				NombreElements -= 1 ; 
+				request.getSession().setAttribute("NbrElement", NombreElements) ; 
+				request.getSession().setAttribute("PouletsList", poulets) ; 
+			}
+		}
+		request.getRequestDispatcher("/AffichagePanier.jsp").forward(request, response);
 	}
 
 }
