@@ -49,7 +49,7 @@ public class AffichageInfoPoulet extends HttpServlet {
 			
 			poulet = em.createQuery("from Poulet" , Poulet.class).getSingleResult() ;
 			
-			transaction.commit() ; 
+			transaction.commit() ;
 			
 		} finally {
 			// TODO: handle finally clause
@@ -105,8 +105,18 @@ public class AffichageInfoPoulet extends HttpServlet {
 				request.getSession().setAttribute("NbrElement", NombreElements) ; 
 				request.getSession().setAttribute("PouletsList", poulets) ; 
 			}
+			request.getRequestDispatcher("/AffichagePanier.jsp").forward(request, response);
+			return ; 
 		}
-		request.getRequestDispatcher("/AffichagePanier.jsp").forward(request, response);
+		String btn_valider = request.getParameter("btn-valider") ; 
+		List<Poulet> poulets = (List<Poulet>) request.getSession().getAttribute("PouletsList") ; 
+		if(btn_valider != null) {
+			System.out.println("On vient d'appuier sur valider") ; 
+			request.getSession().setAttribute("PouletsList", poulets) ; 
+			request.getRequestDispatcher("/persistenceCommande").forward(request, response);
+			return ; 
+		}
+		
 	}
 
 }

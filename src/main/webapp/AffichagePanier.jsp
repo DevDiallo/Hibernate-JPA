@@ -8,6 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script type="text/javascript">
+	var message = "${message}";
+	if (message && message.trim() !== "") {
+        alert(message);
+    }
+</script>
+
 <form action="controller" method="POST">
 
 <h3>Bienvenue dans votre panier</h3>
@@ -35,6 +42,9 @@
 <br>
 <input name="btn-supprimer" type="submit" value="Supprimer">
 
+</form>
+<form action="controller" method="POST">
+	<input name="btn-valider" type="submit" value="Valider">
 </form>
 
 </body>
